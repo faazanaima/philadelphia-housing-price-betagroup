@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 from custom_components import pre_preprocessing, normalize_ordinal_columns
 from io import BytesIO
 from sklearn.pipeline import Pipeline
+import joblib
 
 # === Utils ===
 def to_excel(df):
