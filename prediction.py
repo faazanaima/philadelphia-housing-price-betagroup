@@ -3,7 +3,7 @@ import prediction_single
 import prediction_batch
 
 def app():
-    st.markdown("<h1 style='text-align: center;'>🎯HomeMatch: Smart House Price Predictor</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>🎯HomeWorth Philly: Smart House Price Predictor</h1>", unsafe_allow_html=True)
     st.markdown("""
     <p style='text-align: center; font-size: 16px;'>
     Use the buttons below to navigate to prediction pages.
