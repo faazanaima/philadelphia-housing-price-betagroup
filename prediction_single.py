@@ -8,6 +8,7 @@ from conn import get_connection
 import datetime
 from custom_components import pre_preprocessing, normalize_ordinal_columns
 from sklearn.pipeline import Pipeline
+import joblib
 
 plt.rcParams['text.usetex'] = False
 
