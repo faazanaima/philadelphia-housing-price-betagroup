@@ -24,10 +24,14 @@ def to_excel(df):
 # === Load model and pipeline ===
 def load_pipeline():
     try:
-        with open("pipelines.pkl", "rb") as f:
-            saved = pickle.load(f)
-            model = saved["model"]
-            preprocessing = saved["preprocessing"]
+        # with open("pipelines.pkl", "rb") as f:
+        #     saved = pickle.load(f)
+        #     model = saved["model"]
+        #     preprocessing = saved["preprocessing"]
+            saved = joblib.load('pipelines.joblib')
+            model = saved['model']
+            preprocessing = saved['preprocessing']
+        
             pipeline = Pipeline([
                 ("preprocessing", preprocessing),
                 ("model", model)
