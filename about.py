@@ -2,39 +2,40 @@ import streamlit as st
 
 def app():
     # st.set_page_config(page_title="HomeMatch", page_icon="🏠")
-    st.title("🏠 HomeMatch: Fair and Savvy Predictions for Philadelphia Real Estate")
+    st.title("🏠 HomeWorth Philly: Your Property's Value, Just a Click Away")
 
     st.markdown("""
-    ## 🏙️ About HomeMatch
+    ## 🏙️ About HomeWorth Philly
     ---
-    **HomeMatch** is a machine learning–powered solution platform for predicting residential property prices in Philadelphia to generate fair price estimates based on key property characteristics.
+    **HomeWorth Philly** is a machine learning–powered solution platform for predicting residential property prices in Philadelphia to generate fair price estimates based on key property characteristics.
 
     ## 🧠 Core Business Problem
 
     Traditional approaches rely heavily on:
-    - 📉 **Outdated transaction data** (limited to 2017–2018)
-    - 🧮 **Multiple Linear Regression**, which can't capture non-linear relationships
-    - 🧍 **Manual human intervention**, which introduces bias and inconsistency
+    - **Outdated transaction data** (limited to 2017–2018)
+    - **Multiple Linear Regression**
+        Struggles to capture non-linear relationships, especially with large and complex datasets
+    - **Manual human intervention**, which introduces bias and inconsistency
 
     These factors lead to:
-    - ❌ Mispriced properties  
-    - ❌ Flawed housing policy decisions  
-    - ❌ Inefficient tax assessments  
+    - Mispriced properties  
+    - Flawed housing policy decisions  
+    - Inefficient tax assessments  
 
     ---
 
-    ## ✅ Our Modern Approach
+    ## ✅ Our Modern Approach (UNDER DEVELOPMENT)
 
     We address this with a **modern ML-based mass appraisal system** using:
-    - ⚡ **Tree Based Regressor** — scalable, powerful, and designed for structured tabular data
-    - 📅 Extended dataset up to **2020**
-    - 🧪 Systematic **feature engineering and EDA**
-    - 📊 **Inferential comparisons** between market value and sale price
-    - 🧠 **Model interpretability** via AI Powered
+    - **Tree Based Regressor** — state-of-the-art, powerful models designed for both linear and non-linear data, and optimized for large datasets
+    - Extended dataset up to **2020**
+    - Systematic **feature engineering and EDA**
+    - **Inferential comparisons** between market value and sale price
+    - **Model interpretability** via AI Powered
 
     ---
 
-    ## 📊 Model Performance
+    ## 📊 Model Performance (UNDER DEVELOPMENT)
 
     The model evaluated on previously unseen property data, it delivered **strong generalization**:
 
@@ -49,12 +50,12 @@ def app():
     The model performs confidently across typical properties, with robust accuracy and manageable risk for mispricing.
     
 
-    🔍 **Most impactful features**:
+    🔍 **Most impactful features**: (UNDER DEVELOPMENT)
         `total livable area`, `total area`, `interior condition`, `location`
 
     ---
 
-    ## 📌 Why HomeMatch Matters
+    ## 📌 Why HomeMatch Matters (UNDER DEVELOPMENT)
 
     Accurate residential valuation helps:
     - 🏘️ **Homeowners** price competitively  
@@ -66,7 +67,7 @@ def app():
 
     ---
 
-    ## 📐 Analytic Framework
+    ## 📐 Analytic Framework (UNDER DEVELOPMENT)
 
     - 🔍 **EDA & Feature Engineering** on structured residential data
     - 🧠 **Machine Learning Regression** (Random Forest) to predict market value
@@ -76,7 +77,7 @@ def app():
     
     ---
 
-    ## 🎯 Goal
+    ## 🎯 Goal (UNDER DEVELOPMENT)
     > **"Build an accurate, automated, and fair house pricing system predictor using machine learning to support smart real estate decision-making and improve pricing accuracy across Philadelphia."**
 
     Ready to predict smarter? Use the sidebar and get started.
