@@ -20,8 +20,11 @@ def app():
         st.write("Enter property details below to get a fast and fair **market value estimate**.")
         if "pipeline" not in st.session_state:
             try:
-                with open('pipelines.pkl', 'rb') as f:
-                    saved = pickle.load(f)
+                # with open('pipelines.pkl', 'rb') as f:
+                #     saved = pickle.load(f)
+                #     model = saved['model']
+                #     preprocessing = saved['preprocessing']
+                    saved = joblib.load('pipelines.joblib')
                     model = saved['model']
                     preprocessing = saved['preprocessing']
                     
