@@ -5,7 +5,7 @@ import about
 import history
 from custom_components import pre_preprocessing, normalize_ordinal_columns
 
-st.set_page_config(page_title="HomeMatch: Philadelphia Housing Price Predictor", page_icon="🎯")
+st.set_page_config(page_title="HomeWorth Philly: Housing Price Predictor", page_icon="🎯")
 import conn
 
 # ===== Load CSS Styles =====
