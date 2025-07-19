@@ -16,12 +16,12 @@ def app():
     - Neighborhood insights and planning context  
     - Real estate market trends
 
-    🎯 **Objective**:  
+    **Objective**:  
     Minimize pricing errors and prevent both **overpricing** and **undervaluing**.
 
     ---
 
-    👉 **To get started**, choose a page from the sidebar on the left!
+    **To get started**, choose a page from the sidebar on the left!
     """)
 
 if __name__ == "__main__":
