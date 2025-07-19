@@ -242,18 +242,34 @@ def app():
                     except Exception as e:
                         st.error(f"❌ Failed to save prediction history: {e}")
     with tab2:
-        if "df_model" in st.session_state and "prediction" in st.session_state:
-            df_model = st.session_state["df_model"]
-            prediction = st.session_state["prediction"]
+        st.title("SHAP Water Plot Explanation")
 
-            st.subheader("💰 Prediction Result")
-            st.success(f"Estimated House Market Value: **${prediction:,.2f}**")
-            st.write("Under Development")
-            # tab2_shap_local(st.session_state["pipeline"], st.session_state["transformed_input"])
+        if "df_model" in st.session_state and "pipeline" in st.session_state:
+            try:
+                pipeline = st.session_state["pipeline"]
+                model = pipeline.named_steps["model"]
+                inner_preprocessor = model.named_steps["preprocessing"]
+                df_model = st.session_state["df_model"]
+
+                # Transform
+                X_transformed = inner_preprocessor.transform(df_model)
+                feature_names = inner_preprocessor.get_feature_names_out()
+
+                # SHAP explainer
+                explainer = shap.Explainer(model.named_steps["regressor"], X_transformed, feature_names=feature_names)
+                shap_values = explainer(X_transformed)
+
+                fig1, ax1 = plt.subplots(figsize=(10, 5))
+                shap.plots.waterfall(shap_values[0], show=False)
+                st.pyplot(fig1)
+
+            except Exception as e:
+                st.error(f"❌ Failed to generate SHAP explanation: {e}")
+
+
         else:
-            st.info("Please make a prediction first on the 'Prediction' tab.")
+            st.info("ℹ️ Make a prediction first to see SHAP explanation.")
 
 
 if __name__ == "__main__":
     app()
-
