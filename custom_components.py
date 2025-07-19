@@ -17,12 +17,12 @@ ordinal_categories = [
 
 def pre_preprocessing(df_model):
     df_model['type_heater'].fillna('0', inplace=True)
-    df_model['basements'] = df_model['basements'].fillna('N')
+    df_model['basements'] = df_model['basements'].fillna('0')
     df_model['basements'] = np.where(df_model['basements'].isin(list('ABCDEFGHIJ')), 'Y', df_model['basements'])
     df_model['basements'] = np.where(df_model['basements'].isin(['0', 0]), 'N', df_model['basements'])
     df_model['topography'].fillna('F', inplace=True)
-    df_model['garage_type'].fillna('U', inplace=True)
-    df_model['parcel_shape'] = df_model['parcel_shape'].replace(' ', 'U').fillna('E')
+    df_model['garage_type'].fillna('0', inplace=True)
+    df_model['parcel_shape'] = df_model['parcel_shape'].replace(' ', 'E').fillna('E')
     df_model['view_type'].fillna('I', inplace=True)
     df_model['interior_condition'].fillna(0, inplace=True)
     df_model['exterior_condition'].fillna(0, inplace=True)
