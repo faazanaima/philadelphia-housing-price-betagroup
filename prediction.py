@@ -17,7 +17,7 @@ def app():
     if st.session_state.page == "home":
         col1, col2 = st.columns(2)
         with col1:
-            if st.button("🧍‍♀️ Single Prediction"):
+            if st.button("📄 Single Prediction"):
                 st.session_state.page = "single"
         with col2:
             if st.button("📁 Batch Prediction"):
