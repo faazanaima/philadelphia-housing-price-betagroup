@@ -256,9 +256,12 @@ def app():
                 prediction = regressor.predict(X_transformed)
 
                 # Create SHAP explainer with regressor and transformed data
-                explainer = shap.Explainer(regressor, feature_perturbation="interventional", feature_names=preprocessor.get_feature_names_out())
-                shap_values = explainer(X_transformed)
+                # explainer = shap.Explainer(regressor, X_transformed)
+                # shap_values = explainer(X_transformed)
 
+                explainer = shap.TreeExplainer(regressor)
+                shap_values = explainer.shap_values(X_transformed)
+                          
                 st.markdown(
                     "<h3 style='text-align: center;'>SHAP Water Plot</h3>",
                      unsafe_allow_html=True
@@ -267,6 +270,7 @@ def app():
                 fig1, ax1 = plt.subplots(figsize=(10, 5))
                 shap.plots.waterfall(shap_values[0], show=False)
                 st.pyplot(fig1)
+                plt.close()
                 
                 st.markdown("""
                 #### What You’re Seeing in the SHAP Waterfall Plot:
