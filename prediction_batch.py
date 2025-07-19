@@ -46,7 +46,7 @@ def load_pipeline():
 
 # === App Main ===
 def app():
-    tab1, tab2 = st.tabs(["📁 Prediction", "📈 Results"])
+    tab1, tab2 = st.tabs(["📁 Prediction", "📄 Docs"])
 
     pipeline = st.session_state.get("pipeline") or load_pipeline()
     if pipeline is None:
@@ -95,5 +95,10 @@ def app():
                 st.error(f"❌ Failed to process file: {e}")
 
     with tab2:
-        st.write("Under Development")
-
+        st.write("### How to Predict (Batch Housing Price Dataset)")
+        st.markdown("""
+            1. Go to the **Prediction** tab to upload your CSV file.
+            2. Make sure your file includes all required columns with the correct format.
+            3. Once uploaded, the prediction results will be displayed automatically in the same tab.
+            4. Click the **Save** button to download the results. Your browser will trigger a download popup automatically.
+            """)
