@@ -15,7 +15,7 @@ plt.rcParams['text.usetex'] = False
 
 # def tab2_shap_local(pipeline, transformed_input):
 def app():
-    tab1, tab2 = st.tabs(["Prediction", "Results"])
+    tab1, tab2 = st.tabs(["📁 Prediction", "📈 Results"])
 
     with tab1:
         st.write("Enter property details below to get a fast and fair **market value estimate**.")
