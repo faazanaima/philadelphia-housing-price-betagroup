@@ -150,7 +150,6 @@ def app():
                 pipeline = st.session_state["pipeline"]
                 model = pipeline.named_steps["model"]
                 preprocessing = pipeline.named_steps["preprocessing"]
-
                 
                 # === Transform input with preprocessing pipeline ===
                 preprocessed_input = preprocessing.transform(df_model)
@@ -242,30 +241,60 @@ def app():
                     except Exception as e:
                         st.error(f"❌ Failed to save prediction history: {e}")
     with tab2:
-        st.title("SHAP Water Plot Explanation")
-
         if "df_model" in st.session_state and "pipeline" in st.session_state:
             try:
                 pipeline = st.session_state["pipeline"]
-                model = pipeline.named_steps["model"]
-                inner_preprocessor = model.named_steps["preprocessing"]
-                df_model = st.session_state["df_model"]
+                model_pipeline = pipeline.named_steps["model"]  # pipeline with preprocessing + regressor
+                preprocessor = model_pipeline.named_steps["preprocessing"]  # exact preprocessing inside model pipeline
+                regressor = model_pipeline.named_steps["regressor"]
+                df_model = st.session_state["df_model"]  # raw input data, no manual preprocessing
 
-                # Transform
-                X_transformed = inner_preprocessor.transform(df_model)
-                feature_names = inner_preprocessor.get_feature_names_out()
+                # Transform input using the model's exact preprocessing pipeline
+                X_transformed = preprocessor.transform(df_model)
 
-                # SHAP explainer
-                explainer = shap.Explainer(model.named_steps["regressor"], X_transformed, feature_names=feature_names)
+                # Predict using the regressor on transformed data
+                prediction = regressor.predict(X_transformed)
+
+                # Create SHAP explainer with regressor and transformed data
+                explainer = shap.Explainer(regressor, feature_perturbation="interventional", feature_names=preprocessor.get_feature_names_out())
                 shap_values = explainer(X_transformed)
 
+                st.markdown(
+                    "<h3 style='text-align: center;'>SHAP Water Plot</h3>",
+                     unsafe_allow_html=True
+                )
+                # Plot SHAP waterfall for the first sample
                 fig1, ax1 = plt.subplots(figsize=(10, 5))
                 shap.plots.waterfall(shap_values[0], show=False)
                 st.pyplot(fig1)
+                
+                st.markdown("""
+                #### What You’re Seeing in the SHAP Waterfall Plot:
+                - Red bars mean the feature is **pushing the prediction higher** — it’s boosting the outcome.
+                - Blue bars mean the feature is **pulling the prediction lower** — it’s holding the outcome back.
+                """)
+
+                col1, col2, col3 = st.columns([1, 2, 1])
+                with col2:
+                    st.write("")
+                    st.write("")
+                    st.write("")
+                    st.markdown(
+                        "<h4 style='text-align: center;'>SHAP Values Data</h3>",
+                        unsafe_allow_html=True
+                    )
+                    feature_names = preprocessor.get_feature_names_out()
+                    shap_vals_sample = shap_values[0].values
+                    df_shap = pd.DataFrame({
+                        'Feature': feature_names,
+                        'SHAP Value': shap_vals_sample,
+                        'Impact': ['Increase' if v > 0 else 'Decrease' for v in shap_vals_sample]
+                    }).sort_values(by='SHAP Value', key=abs, ascending=False)
+                    st.dataframe(df_shap, use_container_width=True)
+
 
             except Exception as e:
                 st.error(f"❌ Failed to generate SHAP explanation: {e}")
-
 
         else:
             st.info("ℹ️ Make a prediction first to see SHAP explanation.")
