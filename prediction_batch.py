@@ -24,7 +24,14 @@ def to_excel(df):
 # === Load model and pipeline ===
 def load_pipeline():
     try:
-        pipeline = joblib.load('pipelines.joblib')
+        # pipeline = joblib.load('pipelines.joblib')
+        file_path = hf_hub_download(
+                    repo_id="faaza/house-price-pipeline",  
+                    filename="pipelines.joblib",      
+                    repo_type="model"                  
+                )
+
+        pipeline = joblib.load(file_path)
 
         st.session_state["pipeline"] = pipeline
         st.session_state["feature_names"] =  pipeline.named_steps["preprocessing"].get_feature_names_out()
@@ -65,8 +72,6 @@ def app():
                     return
 
                 if st.button("🔮 Predict All"):
-                    df = pre_preprocessing(df)
-                    df = normalize_ordinal_columns(df)
                     prediction = pipeline.predict(df)
                     df["predicted_value"] = prediction
                     st.session_state["prediction_df"] = df

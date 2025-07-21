@@ -23,9 +23,9 @@ def app():
         if "pipeline" not in st.session_state:
             try:
                 file_path = hf_hub_download(
-                    repo_id="faaza/house-price-pipeline",  # ganti dengan nama repo kamu
-                    filename="pipelines.joblib",         # nama file di repo
-                    repo_type="model"                    # bisa juga 'space' atau 'dataset'
+                    repo_id="faaza/house-price-pipeline",  
+                    filename="pipelines.joblib",      
+                    repo_type="model"                  
                 )
 
                 pipeline = joblib.load(file_path)
@@ -236,8 +236,6 @@ def app():
             try:
                 pipeline = st.session_state["pipeline"]  # full pipeline with preprocessing + model
                 df_model = st.session_state["df_model"]  # raw input data
-                df_model = pre_preprocessing(df_model)
-                df_model = normalize_ordinal_columns(df_model)
                 prediction = pipeline.predict(df_model)
 
                 preprocessor = pipeline.named_steps["preprocessing"]
