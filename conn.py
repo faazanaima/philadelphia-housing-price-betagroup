@@ -1,6 +1,7 @@
 import psycopg2
 from psycopg2 import OperationalError
 import streamlit as st
+import os
 
 def get_connection():
     try:
